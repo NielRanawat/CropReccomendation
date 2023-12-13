@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body data-theme="bumblebee">
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+          <div class="text-center lg:text-left">
+            <h1 class="text-5xl font-bold">Signup Now!</h1>
+            <p class="py-6">Unlock prosperity in every harvest: Join us to elevate your yield with tailored insights and smart crop predictions.</p>
+          </div>
+          <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <form method="post" action="/login" class="card-body">
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="email" placeholder="email" class="input input-bordered" required />
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Full Name</span>
+                </label>
+                <input type="text" placeholder="name" class="input input-bordered" required />
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Pincode</span>
+                </label>
+                <input type="text" placeholder="pincode" class="input input-bordered" required />
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Password</span>
+                </label>
+                <input type="password" placeholder="password" class="input input-bordered" required />
+
+              </div>
+              <div class="form-control mt-2">
+                <button class="btn btn-primary">Sign up</button>
+              </div>
+              <div class="flex justify-center mt-3">
+                <span class="text-xs text-center">Already a user?<a style="text-decoration: underline;" href="/login"> Login</a></span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</body>
+
+</html>
