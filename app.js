@@ -16,6 +16,11 @@ app.get('/signup' , (req , res) => {
     res.render("signup");
 });
 
+app.get('/predict' , (req , res) => {
+    res.render("predict");
+});
+
+
 app.listen(3000 , () => {
     console.log("SERVER STARTED");
 });
