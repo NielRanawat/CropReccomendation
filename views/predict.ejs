@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EPICS project</title>
+    <link rel="shortcut icon" href="https://img.icons8.com/color/48/wheat.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body data-theme="bumblebee">
     <div class="navbar bg-zinc-50">
         <div class="flex-1">
-          <a class="btn btn-ghost text-xl">EPICS Project</a>
+          <a href="/"  class="btn btn-ghost text-xl">
+            <img width="30" src="https://img.icons8.com/color/42/wheat.png" alt="icon">
+            
+            Crop Prediction</a>
         </div>
         <div class="flex-none">
           <ul class="menu menu-horizontal px-1">
@@ -36,7 +40,7 @@
         </h2>
       </div>
   
-      <form>
+      <form id="form">
         <!-- Section -->
         <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 null:border-gray-700 null:first:border-transparent">
           <label for="af-payment-billing-contact" class="inline-block text-sm font-medium null:text-white">
@@ -63,11 +67,11 @@
       </form>
   
       <div class="mt-5 flex justify-end gap-x-2">
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none null:bg-slate-900 null:border-gray-700 null:text-white null:hover:bg-gray-800 null:focus:outline-none null:focus:ring-1 null:focus:ring-gray-600">
-          Cancel
+        <button onclick="resetForm()" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none null:bg-slate-900 null:border-gray-700 null:text-white null:hover:bg-gray-800 null:focus:outline-none null:focus:ring-1 null:focus:ring-gray-600">
+          Clear
         </button>
-        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none null:focus:outline-none null:focus:ring-1 null:focus:ring-gray-600">
-          Save changes
+        <button type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-yellow-400 text-white hover:bg-yellow-500 disabled:opacity-50 disabled:pointer-events-none null:focus:outline-none null:focus:ring-1 null:focus:ring-gray-600">
+          Predict
         </button>
       </div>
     </div>
@@ -77,4 +81,9 @@
         </div>
        
       </div>
+      <script>
+        function resetForm(){
+          document.getElementById("form").reset();
+        }
+      </script>
 </body>
