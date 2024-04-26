@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const axios = require('axios');
+
 
 const app = express();
 
@@ -96,6 +98,24 @@ app.get('/predict' , (req , res) => {
         res.redirect('/login')
     }
 });
+
+app.get('/weather' , (req,res) => {
+    const axios = require('axios');
+    const location = req.body.location;
+
+    // Test with postman
+    //Make GET request to localhost:3000/weather with location parameter
+    //for example : location = "Mumbai"
+    axios.get(`https://api.weatherapi.com/v1/current.json?key=b7d8855383cd4b23a3f83631242604&q=${location}&aqi=no`)
+        .then(response => {
+            res.json(response.data);
+            console.log('Response:', response.data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+})
 
 
 connectDB().then(() => {
