@@ -98,60 +98,20 @@
         Crop Prediction
       </h2>
       <p class="text-sm mt-2 text-gray-600 null:text-neutral-400">
-        Please fill the required details
+        Note : Prediction is not 100% accurate.
       </p>
     </div>
 
-    <form id="form" action="/predict" method="POST">
-      <!-- Section -->
-      <div class="py-6 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 null:border-neutral-700 null:first:border-transparent">
-        <label for="af-payment-billing-contact" class="inline-block text-md font-medium text-lime-500">
-          Location Details
-        </label>
-
-        <div class="mt-2">
-          <label class="label">
-            <span class="label-text">City Name</span>
-          </label>
-          <input autocomplete="off" type="text" required name="location" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600" placeholder="Mumbai">
-        </div>
-      </div>
-      <!-- End Section -->
-
-      <!-- Section -->
-      <div class="py-4 first:pt-0 last:pb-0 border-t first:border-transparent border-gray-200 null:border-neutral-700 null:first:border-transparent">
-        <label for="af-payment-billing-address" class="inline-block text-md font-medium text-lime-500">
-          Soil Details
-        </label>
-
-        <div class="mt-2">
-          <label class="label">
-            <span class="label-text">Nitrogen (mm)</span>
-          </label>
-          <input type="number" name="nitrogen" required autocomplete="off" class="py-2 mb-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600">
-        
-          <label class="label">
-            <span class="label-text">Phosphorus (mm)</span>
-          </label>
-          <input type="number" name="phosphorus" required autocomplete="off" class="py-2 mb-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600">
-
-          <label class="label">
-            <span class="label-text">Potassium (mm)</span>
-          </label>
-          <input type="number" name="potassium" required autocomplete="off" class="py-2 mb-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600" >
-        </div>
-      </div>
-      <!-- End Section -->
+    <p class="text-center text-xl">Best crop for your farm will be</p>
+    <p class="text-center mt-3 text-lime-500 text-3xl"><%= data.predicted_label.toUpperCase() %></p>
 
       <div class="mt-5 flex justify-end gap-x-2">
-        <button onclick="resetForm()" type="button" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-white null:hover:bg-neutral-800">
-          Clear
-        </button>
-        <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-black bg-lime-400  hover:bg-lime-500 disabled:opacity-50 disabled:pointer-events-none">
-          Predict
-        </button>
+        <a href="/predict">
+            <button type="submit" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent text-black bg-lime-400  hover:bg-lime-500 disabled:opacity-50 disabled:pointer-events-none">
+                Predict again?
+              </button>
+        </a>
       </div>
-    </form>
 
     <script>
       function resetForm(){

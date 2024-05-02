@@ -1,13 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Crop Prediction</title>
     <link rel="shortcut icon" href="https://img.icons8.com/color/48/wheat.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1650559623961927681/GIuz2m6K_400x400.jpg"
+    type="image/x-icon">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="
+    https://cdn.jsdelivr.net/npm/preline@2.0.3/dist/preline.min.js
+    "></script>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Reddit+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@preline/dropdown/index.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </head>
+<style>
+  body{
+    font-family: "Reddit Sans", sans-serif;
+
+  }
+</style>
 <body data-theme="bumblebee">
     <div class="hero min-h-screen bg-base-200" style="background-image: url(https://images.pexels.com/photos/259280/pexels-photo-259280.jpeg?cs=srgb&dl=pexels-pixabay-259280.jpg&fm=jpg);">
         <div class="hero-content flex-col lg:flex-row-reverse">
@@ -18,28 +41,6 @@
           </div>
           <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form method="post" action="/auth/login" class="card-body">
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Email</span>
-                </label>
-                <input name="username" type="email" placeholder="email" class="input input-bordered" required />
-              </div>
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Password</span>
-                </label>
-                <input name="password" type="password" placeholder="password" class="input input-bordered" required />
-                <label class="label">
-                  <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-                </label>
-              </div>
-              <div class="form-control mt-2">
-                <button class="btn btn-primary">Login</button>
-              </div>
-              <div class="flex justify-center mt-3">
-                <span class="text-xs text-center">New user?<a style="text-decoration: underline;" href="/auth/signup"> Signup</a></span>
-              </div>
-              <hr class="my-4">
               <button type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
                 <svg class="w-4 h-auto" width="46" height="47" viewBox="0 0 46 47" fill="none">
                   <path d="M46 24.0287C46 22.09 45.8533 20.68 45.5013 19.2112H23.4694V27.9356H36.4069C36.1429 30.1094 34.7347 33.37 31.5957 35.5731L31.5663 35.8669L38.5191 41.2719L38.9885 41.3306C43.4477 37.2181 46 31.1669 46 24.0287Z" fill="#4285F4"/>
@@ -49,6 +50,32 @@
                 </svg>
                 Sign in with Google
               </button>
+              <hr class="my-4">
+
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Email</span>
+                </label>
+                <input name="username" required type="email" placeholder="email" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600">
+
+              </div>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Password</span>
+                </label>
+                <input name="password" required type="password" placeholder="password" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none null:bg-neutral-900 null:border-neutral-700 null:text-neutral-400 null:placeholder-neutral-500 null:focus:ring-neutral-600">
+
+                <label class="label">
+                  <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                </label>
+              </div>
+              <div class="form-control mt-2">
+                <button class="btn border-none bg-lime-400 hover:bg-lime-500">Login</button>
+              </div>
+              <div class="flex justify-center mt-3">
+                <span class="text-xs text-center">New user?<a style="text-decoration: underline;" href="/auth/signup"> Signup</a></span>
+              </div>
+              
             </form>
           </div>
         </div>
