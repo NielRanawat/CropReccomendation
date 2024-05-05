@@ -55,6 +55,14 @@ userSchema.plugin(passportLocalMongoose);
 
 const User = mongoose.model("User" , userSchema);
 
+const dataSchema = new mongoose.Schema({
+    state : {type:String, unique:true},
+    ph : String,
+    rainfall : String,
+});
+
+const Data = mongoose.model("Data" , dataSchema);
+
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -106,7 +114,7 @@ app.post("/auth/login", passport.authenticate("local",{
 });
 
 app.post("/auth/signup" , function(req,res){
-    User.register({username : req.body.username , name : req.body.name , email : req.body.email} , req.body.password , function(err,user){
+    User.register({username : req.body.username , name : req.body.name , email : req.body.usernamex} , req.body.password , function(err,user){
         if (err){
             console.log(err);
             res.render('500')
@@ -128,37 +136,113 @@ app.get('/predict' , (req , res) => {
     }
 });
 
-app.post('/predict' , (req , res) => {
-    if(req.isAuthenticated()){
-        const data = req.body;
+// app.post('/predict' , (req , res) => {
+//     if(req.isAuthenticated()){
+//         const data = req.body;
     
-        axios.get(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${data.location}&aqi=no`)
-            .then(weatherResponse => {
-                // Extract relevant weather data
-                const ph = 23.20202;
-                const rainfall = 19.23922;
-                const inputData = {
-                    "input_features": [parseFloat(data.nitrogen), parseFloat(data.phosphorus), parseFloat(data.potassium), parseFloat(weatherResponse.data.current.temp_c), parseFloat(weatherResponse.data.current.humidity), ph, rainfall]
-                }
-    
-                // Pass weather data to the ML API
-                return axios.post('http://127.0.0.1:5000/predict', { inputData });
-            })
-            .then(mlResponse => {
-                // Send ML API response to the client
-                res.render('prediction' , {data : mlResponse.data})
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                res.render('500')
-            });
-    
-    } else {
-        res.redirect('/login')
-    }
+//         axios.get(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${data.location}&aqi=no`)
+//             .then(weatherResponse => {
+//                 let ph = 0 ;
+//                 let rainfall = 0;
+//                 Data.findOne({state : weatherResponse.data.location.region} , (err , foundPost) => {
+//                     ph = foundPost.ph;
+//                     rainfall = foundPost.rainfall;
 
+//                     console.log(ph);
+//                     console.log(rainfall);
+
+//                 })
+
+//                 const inputData = {
+//                     "input_features": [parseFloat(data.nitrogen), parseFloat(data.phosphorus), parseFloat(data.potassium), parseFloat(weatherResponse.data.current.temp_c), parseFloat(weatherResponse.data.current.humidity), ph, rainfall]
+//                 }
+    
+//                 // Pass weather data to the ML API
+//                 return axios.post('http://127.0.0.1:5000/predict', { inputData });
+//             })
+//             .then(mlResponse => {
+//                 // Send ML API response to the client
+//                 res.render('prediction' , {data : mlResponse.data})
+//             })
+//             .catch(error => {
+//                 console.error('Error:', error);
+//                 res.render('500')
+//             });
+    
+//     } else {
+//         res.redirect('/login')
+//     }
+
+// });
+
+app.post('/predict', async (req, res) => {
+    try {
+        if (req.isAuthenticated()) {
+            const data = req.body;
+
+            const weatherResponse = await axios.get(`https://api.weatherapi.com/v1/current.json?key=${WEATHER_API_KEY}&q=${data.location}&aqi=no`);
+
+            const foundPost = await Data.findOne({ state: weatherResponse.data.location.region });
+
+            if (!foundPost) {
+                console.error('No data found in the database for the state:', weatherResponse.data.location.region);
+                return res.render('500');
+            }
+
+            const ph = foundPost.ph;
+            const rainfall = foundPost.rainfall;
+
+            console.log('ph:', ph);
+            console.log('rainfall:', rainfall);
+
+            const inputData = {
+                "input_features": [
+                    parseFloat(data.nitrogen),
+                    parseFloat(data.phosphorus),
+                    parseFloat(data.potassium),
+                    parseFloat(weatherResponse.data.current.temp_c),
+                    parseFloat(weatherResponse.data.current.humidity),
+                    ph,
+                    rainfall
+                ]
+            };
+
+            const mlResponse = await axios.post('http://127.0.0.1:5000/predict', { inputData });
+
+            // Send ML API response to the client
+            return res.render('prediction', { data: mlResponse.data });
+        } else {
+            return res.redirect('/login');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return res.render('500');
+    }
 });
 
+
+
+app.post('/add-data', async (req, res) => {
+    try {
+      // Extract parameters from URL
+      const { state, ph, rainfall } = req.query;
+  
+      // Create new Data document
+      const newData = new Data({
+        state,
+        ph,
+        rainfall
+      });
+  
+      // Save the data to MongoDB
+      await newData.save();
+  
+      res.status(200).send('Data added successfully');
+    } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 connectDB().then(() => {
     console.log("EPICS DB CONNETED SUCCESFULLY");
