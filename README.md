@@ -37,3 +37,10 @@ environment and monitoring its performance over time.
 9. Maintenance and Updates: Regularly maintaining and updating the model 
 to improve accuracy and relevanc
 
+![alt text](https://github.com/NielRanawat/EPICS/blob/77b5e2fcd02cbd4c2ca7100e008765c6a12cc4d7/Screenshot%202024-05-14%20164441.png)
+
+![alt text](https://github.com/NielRanawat/EPICS/blob/09c00216fb5c68c1621016fb1ac66a52ba60724f/Accuracy.png)
+
+![alt text](https://github.com/NielRanawat/EPICS/blob/f230e0349d78c38c1f27c2bb53c48df3693a5e8f/InputFields.png)
+
+![alt text](https://github.com/NielRanawat/EPICS/blob/b99c3bf5c68793ad96250e577f3f26bdfc987421/Prediction.png)
